@@ -2,12 +2,13 @@
 
 import { motion } from 'motion/react'
 import { Apple, Download, Monitor } from 'lucide-react'
+import { useMemo } from 'react'
 
+import type { ReleaseDownloads } from '@/lib/get-release-downloads'
 import {
-  APP_VERSION,
   PLATFORM_DOWNLOADS,
-  RELEASES_LATEST_URL,
   type DownloadPlatform,
+  type PlatformDownload,
 } from '@/lib/github-releases'
 import { cn } from '@/lib/utils'
 
@@ -17,21 +18,39 @@ const PLATFORM_ICONS: Record<DownloadPlatform, typeof Monitor> = {
   linux: Download,
 }
 
+function detectPlatform(): DownloadPlatform | null {
+  if (typeof navigator === 'undefined') return null
+  const ua = navigator.userAgent.toLowerCase()
+  const platform = navigator.platform?.toLowerCase() ?? ''
+
+  if (ua.includes('win') || platform.includes('win')) return 'windows'
+  if (ua.includes('mac') || platform.includes('mac')) return 'mac'
+  if (ua.includes('linux') || platform.includes('linux')) return 'linux'
+  return null
+}
+
 type DownloadButtonsProps = {
   className?: string
   showAllReleases?: boolean
   compact?: boolean
+  release?: ReleaseDownloads
 }
 
 export function DownloadButtons({
   className,
   showAllReleases = true,
   compact = false,
+  release,
 }: DownloadButtonsProps) {
-  const platforms = Object.entries(PLATFORM_DOWNLOADS) as [
+  const detectedPlatform = useMemo(() => detectPlatform(), [])
+
+  const platforms = Object.entries(release?.platforms ?? PLATFORM_DOWNLOADS) as [
     DownloadPlatform,
-    (typeof PLATFORM_DOWNLOADS)[DownloadPlatform],
+    PlatformDownload,
   ][]
+
+  const versionLabel = release?.version ?? null
+  const releasePageUrl = release?.releasePageUrl
 
   return (
     <div className={cn('space-y-4', className)}>
@@ -43,14 +62,15 @@ export function DownloadButtons({
       >
         {platforms.map(([key, platform], index) => {
           const Icon = PLATFORM_ICONS[key]
-          const isPrimary = key === 'windows'
+          const isPrimary = detectedPlatform ? key === detectedPlatform : key === 'windows'
 
           return (
             <motion.a
               key={key}
               href={platform.href}
-              target="_blank"
-              rel="noopener noreferrer"
+              download={platform.href.startsWith('/download/')}
+              target={platform.href.startsWith('http') ? '_blank' : undefined}
+              rel={platform.href.startsWith('http') ? 'noopener noreferrer' : undefined}
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.15 + index * 0.08, duration: 0.45 }}
@@ -78,18 +98,22 @@ export function DownloadButtons({
         })}
       </div>
 
-      {showAllReleases ? (
+      {showAllReleases && releasePageUrl ? (
         <p className="text-center text-sm text-muted-foreground">
           <a
-            href={RELEASES_LATEST_URL}
+            href={releasePageUrl}
             target="_blank"
             rel="noopener noreferrer"
             className="underline decoration-primary/40 underline-offset-4 transition-colors hover:text-primary"
           >
             All releases on GitHub
           </a>
-          <span className="mx-2 text-border">·</span>
-          <span>v{APP_VERSION}</span>
+          {versionLabel ? (
+            <>
+              <span className="mx-2 text-border">·</span>
+              <span>v{versionLabel}</span>
+            </>
+          ) : null}
         </p>
       ) : null}
     </div>

@@ -3,8 +3,13 @@
 import { motion } from 'motion/react'
 
 import { DownloadButtons } from '@/components/download/DownloadButtons'
+import type { ReleaseDownloads } from '@/lib/get-release-downloads'
 
-export function HeroSection() {
+type HeroSectionProps = {
+  release: ReleaseDownloads
+}
+
+export function HeroSection({ release }: HeroSectionProps) {
   return (
     <section className="relative z-10 flex min-h-screen flex-col justify-center px-4 pb-20 pt-28 sm:px-6">
       <div className="mx-auto w-full max-w-6xl">
@@ -41,7 +46,7 @@ export function HeroSection() {
           transition={{ duration: 0.55, delay: 0.2 }}
           className="mt-10 max-w-3xl"
         >
-          <DownloadButtons />
+          <DownloadButtons release={release} />
         </motion.div>
         <motion.p
           initial={{ opacity: 0 }}

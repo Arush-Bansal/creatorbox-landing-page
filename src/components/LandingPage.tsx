@@ -10,21 +10,26 @@ import { HeroSection } from '@/components/sections/HeroSection'
 import { ProblemSection } from '@/components/sections/ProblemSection'
 import { TrustSection } from '@/components/sections/TrustSection'
 import { WorkSection } from '@/components/sections/WorkSection'
+import type { ReleaseDownloads } from '@/lib/get-release-downloads'
 
-export function LandingPage() {
+type LandingPageProps = {
+  release: ReleaseDownloads
+}
+
+export function LandingPage({ release }: LandingPageProps) {
   return (
     <ScrollProgressProvider>
       <LaptopExperience />
       <SiteHeader />
       <main className="relative z-10">
-        <HeroSection />
+        <HeroSection release={release} />
         <ProblemSection />
         <WorkSection />
         <CreateSection />
         <TrustSection />
-        <DownloadSection />
+        <DownloadSection release={release} />
       </main>
-      <SiteFooter />
+      <SiteFooter releasePageUrl={release.releasePageUrl} />
     </ScrollProgressProvider>
   )
 }

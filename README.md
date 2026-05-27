@@ -18,9 +18,13 @@ npm run dev
 
 Open [http://localhost:3000](http://localhost:3000).
 
-## GitHub Releases
+## GitHub Releases & Vercel
 
-Download URLs are dummy placeholders in `src/lib/github-releases.ts` (`creatorbox/creatorbox`). Update `GITHUB_REPO` when the repo is public.
+The site fetches the latest release and serves downloads via `/download/windows`, `/download/mac`, `/download/linux` (works with a **private** repo when `GITHUB_TOKEN` is set on Vercel).
+
+**Lazy deploy checklist:** see [docs/DEPLOY.md](docs/DEPLOY.md).
+
+Desktop builds: [Arush-Bansal/creatorbox](https://github.com/Arush-Bansal/creatorbox) — `git tag v* && git push origin v*`. See that repo’s `docs/release.md`.
 
 ## Build
 
