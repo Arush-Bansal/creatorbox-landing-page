@@ -35,7 +35,8 @@ function SceneContent() {
       <fog attach="fog" args={['#0c0c0f', 8, 22]} />
       <ambientLight intensity={0.35} />
       <directionalLight position={[4, 6, 5]} intensity={1.2} color="#fff8e8" />
-      <directionalLight position={[-5, 2, -3]} intensity={0.5} color="#88e8ff" />
+      <directionalLight position={[-5, 2, -3]} intensity={0.75} color="#88e8ff" />
+      <directionalLight position={[2, -2, 4]} intensity={0.35} color="#f5c518" />
       <ParticleField progress={progress} />
       <EffectComposer multisampling={0}>
         <Bloom
@@ -63,10 +64,10 @@ export function LaptopScene() {
         </Suspense>
       </Canvas>
       <div
-        className="absolute inset-0 opacity-40"
+        className="absolute inset-0 opacity-[0.62]"
         style={{
           background:
-            'radial-gradient(ellipse 80% 50% at 50% 0%, hsl(190 100% 65% / 0.2), transparent 55%), radial-gradient(ellipse 60% 40% at 90% 20%, hsl(40 98% 62% / 0.12), transparent 50%)',
+            'radial-gradient(ellipse 85% 55% at 18% -5%, hsl(190 100% 65% / 0.42), transparent 52%), radial-gradient(ellipse 65% 45% at 88% 15%, hsl(40 98% 62% / 0.32), transparent 48%), radial-gradient(ellipse 70% 50% at 50% 100%, hsl(190 100% 65% / 0.14), transparent 50%)',
         }}
         aria-hidden
       />

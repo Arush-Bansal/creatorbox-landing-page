@@ -21,7 +21,12 @@ Redeploy after saving (Deployments → … → Redeploy).
 4. Generate and copy the token once.
 5. Paste into Vercel as `GITHUB_TOKEN`.
 
-This token stays on the server only. Download buttons use `/download/windows` (etc.); the server exchanges it for a short-lived GitHub CDN link so visitors never need GitHub access.
+This token stays on the server only. It powers:
+
+- Download buttons (`/download/windows`, etc.)
+- Auto-update manifests (`/api/updates/latest.yml`, etc.) for the installed desktop app
+
+Visitors and the app never need GitHub access or a token in the installer.
 
 ## 3. Create `GH_TOKEN` (desktop repo — for publishing releases)
 

@@ -38,10 +38,10 @@ export function ParticleField({ count = 2400, progress }: ParticleFieldProps) {
         <bufferAttribute attach="attributes-position" args={[positions, 3]} />
       </bufferGeometry>
       <pointsMaterial
-        size={0.045}
+        size={0.05}
         color="#f5d547"
         transparent
-        opacity={0.55 + progress * 0.15}
+        opacity={0.68 + progress * 0.12}
         depthWrite={false}
         blending={THREE.AdditiveBlending}
         sizeAttenuation

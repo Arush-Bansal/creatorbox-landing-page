@@ -7,7 +7,7 @@ import {
   type GitHubRelease,
   type PlatformDownload,
 } from '@/lib/github-releases'
-import { githubApiHeaders } from '@/lib/github-api'
+import { fetchLatestReleaseRaw } from '@/lib/release-asset-fetch'
 
 export type PlatformReleaseInfo = PlatformDownload & {
   assetId: number | null
@@ -24,26 +24,8 @@ export type ReleaseDownloads = {
   hasDirectAssets: boolean
 }
 
-const RELEASE_REVALIDATE_SECONDS = 300
-
 function stripVersionPrefix(tagName: string): string {
   return tagName.replace(/^v/i, '')
-}
-
-async function fetchLatestRelease(repo: string): Promise<GitHubRelease | null> {
-  const url = `https://api.github.com/repos/${repo}/releases/latest`
-  const response = await fetch(url, {
-    headers: githubApiHeaders(),
-    next: { revalidate: RELEASE_REVALIDATE_SECONDS },
-  })
-
-  if (response.status === 404) return null
-  if (!response.ok) {
-    console.warn(`[releases] GitHub API ${response.status} for ${repo}`)
-    return null
-  }
-
-  return (await response.json()) as GitHubRelease
 }
 
 function buildPlatformDownloads(
@@ -71,7 +53,7 @@ function buildPlatformDownloads(
 export async function getReleaseDownloads(): Promise<ReleaseDownloads> {
   const repo = getGithubRepo()
   const releasePageUrl = getReleasesLatestUrl(repo)
-  const release = await fetchLatestRelease(repo)
+  const release = await fetchLatestReleaseRaw()
   const platforms = buildPlatformDownloads(release, repo)
 
   const hasDirectAssets = (['windows', 'mac', 'linux'] as DownloadPlatform[]).every(

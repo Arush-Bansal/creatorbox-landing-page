@@ -43,11 +43,12 @@ body {
 
 .nebula-static-bg {
   background-image:
-    radial-gradient(70rem 40rem at 20% -10%, hsl(var(--nebula-cyan) / 0.35), transparent 60%),
-    radial-gradient(44rem 30rem at 86% 12%, hsl(var(--nebula-gold) / 0.22), transparent 64%),
-    linear-gradient(to bottom, hsl(var(--background) / 0.5), hsl(var(--background) / 0.92)),
+    radial-gradient(70rem 40rem at 20% -10%, hsl(var(--nebula-cyan) / 0.52), transparent 58%),
+    radial-gradient(44rem 30rem at 86% 12%, hsl(var(--nebula-gold) / 0.38), transparent 62%),
+    radial-gradient(50rem 35rem at 55% 85%, hsl(var(--nebula-cyan) / 0.18), transparent 55%),
+    linear-gradient(to bottom, hsl(var(--background) / 0.32), hsl(var(--background) / 0.82)),
     url('/backgrounds/creatorbox-nebula.jpg');
-  background-size: auto, auto, auto, cover;
+  background-size: auto, auto, auto, auto, cover;
   background-position: center;
 }
 
