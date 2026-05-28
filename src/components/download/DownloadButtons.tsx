@@ -50,7 +50,7 @@ export function DownloadButtons({
   ][]
 
   const versionLabel = release?.version ?? null
-  const releasePageUrl = release?.releasePageUrl
+  const showGithubLink = release?.hasDirectAssets ?? false
 
   return (
     <div className={cn('space-y-4', className)}>
@@ -98,21 +98,27 @@ export function DownloadButtons({
         })}
       </div>
 
-      {showAllReleases && releasePageUrl ? (
+      {showAllReleases ? (
         <p className="text-center text-sm text-muted-foreground">
-          <a
-            href={releasePageUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="underline decoration-primary/40 underline-offset-4 transition-colors hover:text-primary"
-          >
-            All releases on GitHub
-          </a>
+          {showGithubLink ? (
+            <a
+              href={release?.releasePageUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="underline decoration-primary/40 underline-offset-4 transition-colors hover:text-primary"
+            >
+              Release notes on GitHub
+            </a>
+          ) : null}
           {versionLabel ? (
             <>
-              <span className="mx-2 text-border">·</span>
+              {showGithubLink ? <span className="mx-2 text-border">·</span> : null}
               <span>v{versionLabel}</span>
             </>
+          ) : release?.fetchError === 'missing_token' ? (
+            <span>Downloads will work once GITHUB_TOKEN is set on Vercel.</span>
+          ) : release?.fetchError === 'not_found' ? (
+            <span>Waiting for the first GitHub release build…</span>
           ) : null}
         </p>
       ) : null}

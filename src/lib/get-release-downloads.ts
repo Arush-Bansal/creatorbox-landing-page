@@ -7,11 +7,14 @@ import {
   type GitHubRelease,
   type PlatformDownload,
 } from '@/lib/github-releases'
-import { fetchLatestReleaseRaw } from '@/lib/release-asset-fetch'
+import {
+  fetchLatestReleaseWithMeta,
+  type ReleaseFetchError,
+} from '@/lib/release-asset-fetch'
 
 export type PlatformReleaseInfo = PlatformDownload & {
   assetId: number | null
-  /** Direct GitHub asset URL (used when no token / public repo). */
+  fileName: string | null
   githubAssetUrl: string | null
 }
 
@@ -22,6 +25,7 @@ export type ReleaseDownloads = {
   releasePageUrl: string
   platforms: Record<DownloadPlatform, PlatformReleaseInfo>
   hasDirectAssets: boolean
+  fetchError: ReleaseFetchError | null
 }
 
 function stripVersionPrefix(tagName: string): string {
@@ -30,9 +34,7 @@ function stripVersionPrefix(tagName: string): string {
 
 function buildPlatformDownloads(
   release: GitHubRelease | null,
-  repo: string,
 ): Record<DownloadPlatform, PlatformReleaseInfo> {
-  const fallbackHref = getReleasesLatestUrl(repo)
   const platforms: DownloadPlatform[] = ['windows', 'mac', 'linux']
 
   return platforms.reduce(
@@ -40,8 +42,9 @@ function buildPlatformDownloads(
       const asset = release ? pickAssetForPlatform(release.assets, platform) : null
       acc[platform] = {
         ...PLATFORM_LABELS[platform],
-        href: asset ? `/download/${platform}` : fallbackHref,
+        href: `/download/${platform}`,
         assetId: asset?.id ?? null,
+        fileName: asset?.name ?? null,
         githubAssetUrl: asset?.browser_download_url ?? null,
       }
       return acc
@@ -53,8 +56,8 @@ function buildPlatformDownloads(
 export async function getReleaseDownloads(): Promise<ReleaseDownloads> {
   const repo = getGithubRepo()
   const releasePageUrl = getReleasesLatestUrl(repo)
-  const release = await fetchLatestReleaseRaw()
-  const platforms = buildPlatformDownloads(release, repo)
+  const { release, error } = await fetchLatestReleaseWithMeta()
+  const platforms = buildPlatformDownloads(release)
 
   const hasDirectAssets = (['windows', 'mac', 'linux'] as DownloadPlatform[]).every(
     (platform) => platforms[platform].assetId !== null,
@@ -67,6 +70,7 @@ export async function getReleaseDownloads(): Promise<ReleaseDownloads> {
     releasePageUrl,
     platforms,
     hasDirectAssets,
+    fetchError: error,
   }
 }
 

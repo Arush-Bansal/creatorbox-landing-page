@@ -26,8 +26,10 @@ export function DownloadSection({ release }: DownloadSectionProps) {
         </h2>
         <p className="mt-4 text-muted-foreground">
           {release.hasDirectAssets
-            ? 'Choose your platform below — the installer downloads directly from GitHub Releases.'
-            : 'Release builds are published on GitHub. Choose your platform below (links go to the latest release page until the first build is published).'}{' '}
+            ? 'Choose your platform below — your browser will download the installer directly.'
+            : release.fetchError === 'missing_token'
+              ? 'Downloads are almost ready — the site needs GITHUB_TOKEN on Vercel to read the private release.'
+              : 'Choose your platform below once the latest release build has finished on GitHub Actions.'}{' '}
           Requires Claude Code / Anthropic authentication for the Work agent.
         </p>
         <div className="mt-10">

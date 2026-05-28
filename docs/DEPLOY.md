@@ -11,7 +11,9 @@ In the Vercel project → **Settings** → **Environment Variables**, add for **
 | `GITHUB_REPO` | `Arush-Bansal/creatorbox` | Must match the desktop repo |
 | `GITHUB_TOKEN` | *(paste PAT)* | See below — **required for private repo** |
 
-Redeploy after saving (Deployments → … → Redeploy).
+Redeploy after saving (Deployments → … → Redeploy). **Without this token, every download button sends people to a private GitHub page that shows “not found”.**
+
+Check: https://creatorbox.arushnerdsout.com/api/releases/status — should show `"tokenConfigured": true` and a `tagName` like `v0.0.3`.
 
 ## 2. Create `GITHUB_TOKEN` (read-only is enough for the website)
 

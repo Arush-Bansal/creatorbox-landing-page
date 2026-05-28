@@ -42,14 +42,19 @@ export const PLATFORM_LABELS: Record<
   },
 }
 
-/** Fallback when the API has no matching asset yet. */
-export function buildFallbackDownloads(repo = getGithubRepo()): Record<DownloadPlatform, PlatformDownload> {
-  const releasesUrl = getReleasesLatestUrl(repo)
-  return {
-    windows: { ...PLATFORM_LABELS.windows, href: releasesUrl },
-    mac: { ...PLATFORM_LABELS.mac, href: releasesUrl },
-    linux: { ...PLATFORM_LABELS.linux, href: releasesUrl },
-  }
+/** Fallback when release metadata is not loaded yet — still route through our download handler. */
+export function buildFallbackDownloads(): Record<DownloadPlatform, PlatformDownload> {
+  const platforms: DownloadPlatform[] = ['windows', 'mac', 'linux']
+  return platforms.reduce(
+    (acc, platform) => {
+      acc[platform] = {
+        ...PLATFORM_LABELS[platform],
+        href: `/download/${platform}`,
+      }
+      return acc
+    },
+    {} as Record<DownloadPlatform, PlatformDownload>,
+  )
 }
 
 export const PLATFORM_DOWNLOADS = buildFallbackDownloads()
@@ -65,6 +70,8 @@ export type GitHubRelease = {
   name: string
   published_at: string
   html_url: string
+  draft?: boolean
+  prerelease?: boolean
   assets: GitHubReleaseAsset[]
 }
 
