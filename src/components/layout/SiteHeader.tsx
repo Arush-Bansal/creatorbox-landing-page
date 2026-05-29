@@ -6,8 +6,7 @@ import Link from 'next/link'
 import { cn } from '@/lib/utils'
 
 const NAV = [
-  { href: '#work', label: 'Work' },
-  { href: '#create', label: 'Create' },
+  { href: '#supports', label: 'Integrations' },
   { href: '#trust', label: 'Trust' },
   { href: '#download', label: 'Download' },
 ] as const

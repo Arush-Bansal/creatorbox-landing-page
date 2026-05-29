@@ -6,17 +6,10 @@ import { motion } from 'motion/react'
 import {
   SUPPORTED_INTEGRATION_COUNT,
   SUPPORTED_INTEGRATIONS,
-  type SupportedIntegration,
 } from '@/lib/supported-integrations'
 import { cn } from '@/lib/utils'
 
 import { SectionShell } from './SectionShell'
-
-const CATEGORY_LABEL: Record<SupportedIntegration['category'], string> = {
-  plugin: 'Managed plugin',
-  api: 'API integration',
-  research: 'Web research',
-}
 
 function SupportLogo({ name, logoUrl }: { name: string; logoUrl: string }) {
   const [failed, setFailed] = useState(false)
@@ -24,7 +17,7 @@ function SupportLogo({ name, logoUrl }: { name: string; logoUrl: string }) {
   if (failed) {
     return (
       <span
-        className="flex size-14 items-center justify-center rounded-xl border border-white/10 bg-background/60 text-lg font-semibold text-primary"
+        className="flex size-16 items-center justify-center rounded-xl border border-white/10 bg-background/60 text-xl font-semibold text-primary sm:size-[4.5rem]"
         aria-hidden
       >
         {name.charAt(0)}
@@ -33,7 +26,7 @@ function SupportLogo({ name, logoUrl }: { name: string; logoUrl: string }) {
   }
 
   return (
-    <div className="flex size-14 shrink-0 items-center justify-center overflow-hidden rounded-xl border border-white/10 bg-background/40 p-2">
+    <div className="flex size-16 shrink-0 items-center justify-center overflow-hidden rounded-xl border border-white/10 bg-background/40 p-2.5 sm:size-[4.5rem]">
       {/* eslint-disable-next-line @next/next/no-img-element -- remote brand URLs from CreatorBox app */}
       <img
         src={logoUrl}
@@ -49,37 +42,32 @@ function SupportLogo({ name, logoUrl }: { name: string; logoUrl: string }) {
 }
 
 function SupportCard({
-  item,
-  index,
+  name,
+  logoUrl,
+  className,
 }: {
-  item: SupportedIntegration
-  index: number
+  name: string
+  logoUrl: string
+  className?: string
 }) {
   return (
-    <motion.li
-      initial={{ opacity: 0, y: 16 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ delay: index * 0.04, duration: 0.4 }}
+    <li
       className={cn(
-        'flex w-[9.5rem] shrink-0 snap-start flex-col items-center gap-3 rounded-2xl glass-card p-4',
-        'sm:w-[10.5rem]',
+        'flex w-[8.25rem] shrink-0 flex-col items-center gap-3 rounded-2xl glass-card px-3 py-4 sm:w-[9.5rem] sm:px-4',
+        className,
       )}
     >
-      <SupportLogo name={item.name} logoUrl={item.logoUrl} />
-      <div className="text-center">
-        <p className="text-sm font-semibold leading-tight">{item.name}</p>
-        <p className="mt-1 text-[0.65rem] uppercase tracking-wide text-muted-foreground">
-          {CATEGORY_LABEL[item.category]}
-        </p>
-      </div>
-    </motion.li>
+      <SupportLogo name={name} logoUrl={logoUrl} />
+      <p className="text-center text-sm font-semibold leading-tight">{name}</p>
+    </li>
   )
 }
 
+const MARQUEE_ITEMS = [...SUPPORTED_INTEGRATIONS, ...SUPPORTED_INTEGRATIONS]
+
 export function SupportsSection() {
   return (
-    <SectionShell id="supports" className="min-h-0 py-20 sm:py-28">
+    <SectionShell id="supports" className="min-h-0 overflow-hidden py-20 sm:py-28">
       <motion.div
         initial={{ opacity: 0, y: 24 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -91,25 +79,48 @@ export function SupportsSection() {
           {SUPPORTED_INTEGRATION_COUNT} tools and APIs, ready in the app
         </h2>
         <p className="mt-4 max-w-2xl text-muted-foreground">
-          Managed FFmpeg and Remotion under Plugins, provider keys in Settings, and Firecrawl for
-          search and scrape — the same brands you configure in CreatorBox.
+          FFmpeg, Remotion, Anthropic, Fal.ai, ElevenLabs, Gemini, and Firecrawl — the same brands
+          you configure in CreatorBox.
         </p>
       </motion.div>
 
-      <div className="relative mt-10">
-        <ul
-          className="flex min-w-min snap-x snap-mandatory gap-4 overflow-x-auto pb-2 pr-4 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
-          aria-label={`${SUPPORTED_INTEGRATION_COUNT} supported tools and integrations`}
-        >
-          {SUPPORTED_INTEGRATIONS.map((item, index) => (
-            <SupportCard key={item.id} item={item} index={index} />
-          ))}
-        </ul>
+      {/* Infinite marquee — pauses on hover / touch focus */}
+      <div
+        className="integration-marquee relative -mx-4 mt-10 motion-reduce:hidden sm:-mx-6"
+        role="region"
+        aria-label={`${SUPPORTED_INTEGRATION_COUNT} supported tools and integrations`}
+      >
         <div
-          className="pointer-events-none absolute inset-y-0 right-0 w-12 bg-gradient-to-l from-background to-transparent sm:w-16"
+          className="pointer-events-none absolute inset-y-0 left-0 z-10 w-12 bg-gradient-to-r from-background via-background/90 to-transparent sm:w-24"
           aria-hidden
         />
+        <div
+          className="pointer-events-none absolute inset-y-0 right-0 z-10 w-12 bg-gradient-to-l from-background via-background/90 to-transparent sm:w-24"
+          aria-hidden
+        />
+
+        <div className="overflow-hidden px-1">
+          <ul className="integration-marquee-track flex w-max gap-3 sm:gap-4">
+            {MARQUEE_ITEMS.map((item, index) => (
+              <SupportCard
+                key={`${item.id}-${index}`}
+                name={item.name}
+                logoUrl={item.logoUrl}
+              />
+            ))}
+          </ul>
+        </div>
       </div>
+
+      {/* Static grid when reduced motion is preferred */}
+      <ul
+        className="mt-10 hidden grid-cols-2 gap-3 motion-reduce:grid sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7"
+        aria-label={`${SUPPORTED_INTEGRATION_COUNT} supported tools and integrations`}
+      >
+        {SUPPORTED_INTEGRATIONS.map((item) => (
+          <SupportCard key={item.id} name={item.name} logoUrl={item.logoUrl} />
+        ))}
+      </ul>
     </SectionShell>
   )
 }
