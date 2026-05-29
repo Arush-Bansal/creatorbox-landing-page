@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96" role="img" aria-labelledby="title desc">
+  <title id="title">CreatorBox logo</title>
+  <desc id="desc">Rounded box mark with nebula swirl and star accent.</desc>
+  <defs>
+    <linearGradient id="cbBoxStroke" x1="12" y1="12" x2="84" y2="84" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#5ee8ff" />
+      <stop offset="0.55" stop-color="#5f9dff" />
+      <stop offset="1" stop-color="#8b5cf6" />
+    </linearGradient>
+    <radialGradient id="cbNebula" cx="0.35" cy="0.35" r="0.8">
+      <stop offset="0" stop-color="#8ef9ff" stop-opacity="0.95" />
+      <stop offset="0.45" stop-color="#46cfff" stop-opacity="0.8" />
+      <stop offset="1" stop-color="#4338ca" stop-opacity="0.2" />
+    </radialGradient>
+    <linearGradient id="cbArc" x1="20" y1="56" x2="80" y2="34" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#6ee7ff" />
+      <stop offset="1" stop-color="#fcd34d" />
+    </linearGradient>
+  </defs>
+  <rect x="12" y="12" width="72" height="72" rx="18" fill="#0b1022" stroke="url(#cbBoxStroke)" stroke-width="3.5" />
+  <circle cx="48" cy="48" r="26" fill="url(#cbNebula)" />
+  <path
+    d="M20 54c10 13 26 19 42 16 7-1 13-4 18-8"
+    fill="none"
+    stroke="url(#cbArc)"
+    stroke-linecap="round"
+    stroke-width="5"
+    opacity="0.9"
+  />
+  <circle cx="62" cy="35" r="4.1" fill="#ffe08a" />
+  <path d="M62 27v4M62 39v4M54 35h4M66 35h4" stroke="#ffe08a" stroke-linecap="round" stroke-width="1.8" />
+</svg>
