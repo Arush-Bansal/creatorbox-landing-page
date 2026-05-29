@@ -5,6 +5,7 @@ import { ScrollProgressProvider } from '@/components/providers/ScrollProgressPro
 import { SiteFooter } from '@/components/layout/SiteFooter'
 import { SiteHeader } from '@/components/layout/SiteHeader'
 import { CreateSection } from '@/components/sections/CreateSection'
+import { SupportsSection } from '@/components/sections/SupportsSection'
 import { DownloadSection } from '@/components/sections/DownloadSection'
 import { HeroSection } from '@/components/sections/HeroSection'
 import { ProblemSection } from '@/components/sections/ProblemSection'
@@ -26,6 +27,7 @@ export function LandingPage({ release }: LandingPageProps) {
         <ProblemSection />
         <WorkSection />
         <CreateSection />
+        <SupportsSection />
         <TrustSection />
         <DownloadSection release={release} />
       </main>
