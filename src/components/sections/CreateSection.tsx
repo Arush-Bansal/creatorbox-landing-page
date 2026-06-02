@@ -14,7 +14,7 @@ const FEATURES = [
   {
     icon: Film,
     title: 'Managed FFmpeg',
-    body: 'Install from Plugins — video, audio, and compositing without global PATH hacks.',
+    body: 'Install from Plugins for video, audio, and compositing without global PATH hacks.',
   },
   {
     icon: Layers,
@@ -24,7 +24,7 @@ const FEATURES = [
   {
     icon: Mic,
     title: 'Integrations',
-    body: 'Fal.ai, ElevenLabs, Google Gemini, and Anthropic — keys in your OS vault.',
+    body: 'Fal.ai, ElevenLabs, Google Gemini, and Anthropic, with keys in your OS vault.',
   },
 ] as const
 
@@ -39,7 +39,7 @@ export function CreateSection() {
       >
         <p className="text-sm font-medium uppercase tracking-widest text-primary">Create</p>
         <h2 className="mt-4 max-w-2xl text-3xl font-semibold tracking-tight sm:text-4xl">
-          Built for video and motion — on your laptop.
+          Built for video and motion on your laptop.
         </h2>
       </motion.div>
       <ul className="mt-12 grid gap-6 sm:grid-cols-2">

@@ -9,7 +9,7 @@ const PANES = [
   {
     icon: FolderTree,
     title: 'Explorer',
-    body: 'Browse your workspace — files stay on disk under a project folder you own.',
+    body: 'Browse your workspace. Files stay on disk under a project folder you own.',
   },
   {
     icon: MessageSquare,
@@ -19,7 +19,7 @@ const PANES = [
   {
     icon: PanelRight,
     title: 'Preview',
-    body: 'Video, audio, images, HTML, Markdown, reels, and more — without leaving the app.',
+    body: 'Video, audio, images, HTML, Markdown, reels, and more, all without leaving the app.',
   },
 ] as const
 
@@ -38,7 +38,7 @@ export function WorkSection() {
         </h2>
         <p className="mt-4 max-w-2xl text-muted-foreground">
           Resizable layout: explorer on the left, agent chat in the center, rich preview on the
-          right — the same structure you get in the app.
+          right, matching the structure you get in the app.
         </p>
       </motion.div>
       <div className="mt-12 grid gap-5 md:grid-cols-3">

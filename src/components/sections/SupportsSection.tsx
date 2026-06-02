@@ -79,12 +79,12 @@ export function SupportsSection() {
           {SUPPORTED_INTEGRATION_COUNT} tools and APIs, ready in the app
         </h2>
         <p className="mt-4 max-w-2xl text-muted-foreground">
-          FFmpeg, Remotion, Anthropic, Fal.ai, ElevenLabs, Gemini, and Firecrawl — the same brands
+          FFmpeg, Remotion, Anthropic, Fal.ai, ElevenLabs, Gemini, and Firecrawl: the same brands
           you configure in CreatorBox.
         </p>
       </motion.div>
 
-      {/* Infinite marquee — pauses on hover / touch focus */}
+      {/* Infinite marquee: pauses on hover / touch focus */}
       <div
         className="integration-marquee relative -mx-4 mt-10 motion-reduce:hidden sm:-mx-6"
         role="region"

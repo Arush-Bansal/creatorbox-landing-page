@@ -37,8 +37,8 @@ export function HeroSection({ release }: HeroSectionProps) {
           transition={{ duration: 0.55, delay: 0.12 }}
           className="mt-6 max-w-2xl text-lg leading-relaxed text-muted-foreground sm:text-xl"
         >
-          A desktop workspace where your agent plans, edits, and previews — video, design, and
-          assets stay on your machine. Fewer tabs. One laptop app.
+          A desktop workspace where your agent plans, edits, and previews video, design, and
+          assets on your machine. Fewer tabs. One laptop app.
         </motion.p>
         <motion.div
           initial={{ opacity: 0, y: 20 }}

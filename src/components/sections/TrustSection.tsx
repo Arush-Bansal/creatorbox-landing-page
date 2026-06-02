@@ -9,7 +9,7 @@ const TRUST = [
   {
     icon: HardDrive,
     title: 'Local-first',
-    body: 'Drafts, renders, and workspaces live on your disk — not a sync server in v1.',
+    body: 'Drafts, renders, and workspaces live on your disk, not a sync server in v1.',
   },
   {
     icon: KeyRound,
@@ -19,7 +19,7 @@ const TRUST = [
   {
     icon: Shield,
     title: 'Workspace boundaries',
-    body: 'Agent runs in the main process behind a typed bridge — scoped to your project folder.',
+    body: 'Agent runs in the main process behind a typed bridge, scoped to your project folder.',
   },
 ] as const
 

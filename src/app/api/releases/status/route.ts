@@ -6,7 +6,7 @@ import { getGithubRepo } from '@/lib/github-releases'
 
 export const dynamic = 'force-dynamic'
 
-/** Owner diagnostics — does not expose secrets. */
+/** Owner diagnostics; does not expose secrets. */
 export async function GET() {
   const release = await getReleaseDownloads()
 

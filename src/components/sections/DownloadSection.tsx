@@ -26,9 +26,9 @@ export function DownloadSection({ release }: DownloadSectionProps) {
         </h2>
         <p className="mt-4 text-muted-foreground">
           {release.hasDirectAssets
-            ? 'Choose your platform below — your browser will download the installer directly.'
+            ? 'Choose your platform below. Your browser will download the installer directly.'
             : release.fetchError === 'missing_token'
-              ? 'Downloads are almost ready — the site needs GITHUB_TOKEN on Vercel to read the private release.'
+              ? 'Downloads are almost ready. The site needs GITHUB_TOKEN on Vercel to read the private release.'
               : 'Choose your platform below once the latest release build has finished on GitHub Actions.'}{' '}
           Requires Claude Code / Anthropic authentication for the Work agent.
         </p>

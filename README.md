@@ -1,6 +1,6 @@
 # CreatorBox download page
 
-Marketing / download landing page for [CreatorBox](https://github.com/creatorbox/creatorbox) — served at `creatorbox.arushnerdsout.com`.
+Marketing / download landing page for [CreatorBox](https://github.com/creatorbox/creatorbox), served at `creatorbox.arushnerdsout.com`.
 
 ## Stack
 
@@ -24,7 +24,7 @@ The site fetches the latest release and serves downloads via `/download/windows`
 
 **Lazy deploy checklist:** see [docs/DEPLOY.md](docs/DEPLOY.md).
 
-Desktop builds: [Arush-Bansal/creatorbox](https://github.com/Arush-Bansal/creatorbox) — `git tag v* && git push origin v*`. See that repo’s `docs/release.md`.
+Desktop builds: [Arush-Bansal/creatorbox](https://github.com/Arush-Bansal/creatorbox). Tag with `git tag v* && git push origin v*`. See that repo’s `docs/release.md`.
 
 ## Build
 

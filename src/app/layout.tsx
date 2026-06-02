@@ -14,11 +14,11 @@ const geistMono = Geist_Mono({
 })
 
 export const metadata: Metadata = {
-  title: 'CreatorBox — The Creative AI\'s missing piece',
+  title: 'CreatorBox | The Creative AI\'s missing piece',
   description:
     'Download CreatorBox for Windows, macOS, and Linux. A desktop workspace where your agent plans, edits, and previews creative projects on your machine.',
   openGraph: {
-    title: 'CreatorBox — The Creative AI\'s missing piece',
+    title: 'CreatorBox | The Creative AI\'s missing piece',
     description:
       'Desktop agentic editor for creatives. Download for Windows, macOS, and Linux.',
   },

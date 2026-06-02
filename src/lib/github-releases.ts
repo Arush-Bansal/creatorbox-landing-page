@@ -1,4 +1,4 @@
-/** GitHub Releases — matches electron-builder artifact names in the desktop app. */
+/** GitHub Releases: matches electron-builder artifact names in the desktop app. */
 export const DEFAULT_GITHUB_REPO = 'Arush-Bansal/creatorbox'
 
 export function getGithubRepo(): string {
@@ -42,7 +42,7 @@ export const PLATFORM_LABELS: Record<
   },
 }
 
-/** Fallback when release metadata is not loaded yet — still route through our download handler. */
+/** Fallback when release metadata is not loaded yet; still route through our download handler. */
 export function buildFallbackDownloads(): Record<DownloadPlatform, PlatformDownload> {
   const platforms: DownloadPlatform[] = ['windows', 'mac', 'linux']
   return platforms.reduce(

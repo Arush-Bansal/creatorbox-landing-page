@@ -9,11 +9,11 @@ In the Vercel project → **Settings** → **Environment Variables**, add for **
 | Name | Value | Notes |
 |------|--------|--------|
 | `GITHUB_REPO` | `Arush-Bansal/creatorbox` | Must match the desktop repo |
-| `GITHUB_TOKEN` | *(paste PAT)* | See below — **required for private repo** |
+| `GITHUB_TOKEN` | *(paste PAT)* | See below. **Required for private repo** |
 
 Redeploy after saving (Deployments → … → Redeploy). **Without this token, every download button sends people to a private GitHub page that shows “not found”.**
 
-Check: https://creatorbox.arushnerdsout.com/api/releases/status — should show `"tokenConfigured": true` and a `tagName` like `v0.0.3`.
+Check: https://creatorbox.arushnerdsout.com/api/releases/status. It should show `"tokenConfigured": true` and a `tagName` like `v0.0.3`.
 
 ## 2. Create `GITHUB_TOKEN` (read-only is enough for the website)
 
@@ -30,7 +30,7 @@ This token stays on the server only. It powers:
 
 Visitors and the app never need GitHub access or a token in the installer.
 
-## 3. Create `GH_TOKEN` (desktop repo — for publishing releases)
+## 3. Create `GH_TOKEN` (desktop repo, for publishing releases)
 
 Different secret, used only in GitHub Actions when building the app:
 
@@ -49,9 +49,9 @@ git tag v0.0.2
 git push origin v0.0.2
 ```
 
-Wait for the **Release** workflow to finish on GitHub Actions. Then open the site — version and downloads should update within ~5 minutes (cache).
+Wait for the **Release** workflow to finish on GitHub Actions. Then open the site; version and downloads should update within ~5 minutes (cache).
 
 ## 5. Quick checks
 
-- https://creatorbox.arushnerdsout.com — shows `v0.0.2` (or your tag) under the buttons.
-- https://creatorbox.arushnerdsout.com/download/windows — starts a `.exe` download (after a release exists).
+- https://creatorbox.arushnerdsout.com shows `v0.0.2` (or your tag) under the buttons.
+- https://creatorbox.arushnerdsout.com/download/windows starts a `.exe` download (after a release exists).
